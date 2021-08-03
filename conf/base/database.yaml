@@ -1,5 +1,0 @@
-PARAMS:
-  host: 'localhost'
-  database: 'running_analytics'
-  user: 'postgres'
-  password: None
