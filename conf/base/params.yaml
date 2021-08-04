@@ -6,7 +6,7 @@ PARAMS:
     CLIENT_SECRET: None
 
   DATABASE:
-    host: None
-    database: None
-    user: None
-    password: None
+    HOST: None
+    DATABASE: None
+    USER: None
+    PASSWORD: None
