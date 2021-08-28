@@ -11,6 +11,7 @@ logger.setLevel(10)
 def main():
     athlete_insights = Athlete(name='Matt Karan')
     athlete_insights.authorize()
+    athlete_insights.query_athlete_activities()
 
 
 if __name__ == '__main__':
