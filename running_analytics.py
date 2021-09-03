@@ -12,6 +12,8 @@ def main():
     athlete_insights = Athlete(name='Matt Karan')
     athlete_insights.authorize()
     athlete_insights.query_athlete_activities()
+    athlete_insights.preprocess_athlete_data()
+    athlete_insights.send_data_to_es()
 
 
 if __name__ == '__main__':

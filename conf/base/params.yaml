@@ -10,3 +10,9 @@ PARAMS:
     DATABASE: None
     USER: None
     PASSWORD: None
+
+  ELASTICSEARCH:
+    HOST: None
+    PORT: None
+    USER: None
+    PASSWORD: None
