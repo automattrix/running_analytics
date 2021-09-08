@@ -17,7 +17,7 @@ class Athlete:
         self.database_params = load_params(p_key='DATABASE')
         self.token_params = load_params(p_key='TOKEN')
         self.es_params = load_params(p_key='ELASTICSEARCH')
-
+        self.strava_params = load_params(p_key='STRAVA_RESULTS')
         self.access_token_dict = None
 
         self.activities_raw = None
@@ -28,11 +28,14 @@ class Athlete:
         logger.info(self.access_token_dict)
 
     def query_athlete_activities(self):
+        activities_params = self.strava_params['ACTIVITIES_OVERVIEW']
         self.activities_raw = get_athlete_activities(
-            access_token=self.access_token_dict['access_token']
+            access_token=self.access_token_dict['access_token'],
+            after=activities_params['AFTER'],
+            per_page=activities_params['PER_PAGE']
         )
-        logger.info(self.activities_raw)
-        print(self.activities_raw[0]['moving_time'])
+        logger.debug(self.activities_raw)
+        logger.info(f"Number of activities:\t[{len(self.activities_raw)}]")
 
     def preprocess_athlete_data(self):
         logger.info("Preprocessing data")

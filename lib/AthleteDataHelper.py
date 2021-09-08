@@ -2,16 +2,44 @@ import requests
 import logging
 import hashlib
 import json
+from lib.utils.common import epoch_days_in_past
 
 logger = logging.getLogger(__name__)
 
 
-def get_athlete_activities(access_token):
+def get_athlete_activities(access_token, page=None, before=None, after=None, per_page=None):
+    """
+    Return json dict of athlete "activity overview" data
+    :param access_token:
+    :param page: Number of pages
+    :param before: Return activities before this date
+    :param after: Return activities after this date
+    :param per_page: Number of activities per page, default 30
+    :return:
+    """
+
+    body = {}
+
+    if page is not None:
+        body['page'] = page
+
+    if after is not None:
+        # convert after into epoch time
+        epoch_timestamp = epoch_days_in_past(num_days=after)
+        body['after'] = epoch_timestamp
+
+    if before is not None:
+        epoch_timestamp = epoch_days_in_past(num_days=before)
+        body['before'] = epoch_timestamp
+
+    if per_page is not None:
+        body['per_page'] = per_page
+
     activity_data = None
     url = f"https://www.strava.com/api/v3/athlete/activities"
     headers = {'content-type': 'application/json',
                'Authorization': 'Bearer ' + access_token}
-    body = {'per_page': '100'}
+
     r = requests.get(url, data=json.dumps(body), headers=headers)
 
     request_status = r.status_code
